@@ -4,3 +4,6 @@
 [submodule "lib/sead"]
 	path = lib/sead
 	url = https://github.com/open-ead/sead
+[submodule "lib/nn"]
+	path = lib/nn
+	url = https://github.com/open-ead/nnsdk
