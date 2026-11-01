@@ -54,7 +54,7 @@ inline u32 fix_rad(f32 val)
 {
     val = fmod(val, M_2PI);
     if (val < 0.0f) val += M_2PI;
-    return val * 683565276;
+    return val * 683565276.0f;
 }
 
 inline f32 unfix_rad(u32 val)
