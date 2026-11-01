@@ -5,6 +5,8 @@ set(CMAKE_C_COMPILER clang)
 set(CMAKE_CXX_COMPILER clang++)
 set(CMAKE_ASM_COMPILER clang)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 set(ARCH_FLAGS "--target=armv7l-none-eabihf -mcpu=cortex-a57 -mfpu=crypto-neon-fp-armv8 -mfloat-abi=hard -fPIC")
 set(CMAKE_C_FLAGS "${ARCH_FLAGS} -nostdlib")
 set(CMAKE_CXX_FLAGS "${ARCH_FLAGS} -nostdlib -fno-rtti -fno-exceptions -fpermissive -fno-sized-deallocation")
