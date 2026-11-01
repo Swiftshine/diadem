@@ -10,7 +10,7 @@ set(CMAKE_C_FLAGS "${ARCH_FLAGS} -nostdlib")
 set(CMAKE_CXX_FLAGS "${ARCH_FLAGS} -nostdlib -fno-rtti -fno-exceptions -fpermissive -fno-sized-deallocation")
 set(CMAKE_ASM_FLAGS "${ARCH_FLAGS}")
 
-file(GLOB_RECURSE SOURCES source/*.*)
+file(GLOB_RECURSE SOURCES src/*.*)
 
 include_directories(include ${CMAKE_CURRENT_BINARY_DIR})
 
