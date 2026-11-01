@@ -28,7 +28,7 @@ ARCH		:=	--target=armv7l-none-eabihf -mabi=aapcs-linux -mcpu=cortex-a57 -mfpu=cr
 	
 CFLAGS		:=	$(ARCH) $(INCLUDE) -nostdlib
 
-CXXFLAGS	:=	$(CFLAGS) -fno-rtti -fno-exceptions -fpermissive
+CXXFLAGS	:=	$(CFLAGS) -fno-rtti -fno-exceptions -fpermissive -fno-sized-deallocation
 
 ASFLAGS		:=	$(ARCH)
 

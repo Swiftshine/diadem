@@ -26,3 +26,5 @@ __pycache__/
 
 # Misc
 /tmp/
+.venv
+scratch/
