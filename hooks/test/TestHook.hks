@@ -1,4 +1,0 @@
-TestHook:
-    type: bl
-    addr: 0x604A2738
-    sym: getDefaultPlayerType

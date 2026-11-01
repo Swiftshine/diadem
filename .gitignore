@@ -30,6 +30,7 @@ __pycache__/
 /tmp/
 .venv
 scratch/
-
+src/scratch/
+hooks/scratch/
 # lib
 lib/std
