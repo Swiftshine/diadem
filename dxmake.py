@@ -10,8 +10,9 @@ main_addr       = 0x00004000
 main_size       = 0x00CD1000
 subsdk_addr     = main_addr + main_size
 main_build_id   = 'AEE6DCCC06D9C05B42061E2019123A61'
-out_nso         = 'subsdk0'
-out_ips         = main_build_id + '.ips'
+out_dir         = 'out'
+out_nso         = os.path.join(out_dir, 'subsdk0')
+out_ips         = os.path.join(out_dir, main_build_id + '.ips')
 
 def fatal(msg):
     print(msg, file=sys.stderr)
@@ -58,12 +59,18 @@ def main(argc, argv):
     except KeyError:
         fatal('Invalid target \"%s\"' % target_name)
 
+    if not os.path.exists(out_dir):
+        os.makedirs(out_dir, exist_ok=True)
+    
     # Remove all build files
     if 'clean' in commands:
         if os.path.exists('build'):
             shutil.rmtree('build')
+        
+        if os.path.exists(out_dir):
+            shutil.rmtree(out_dir)
 
-        for p in ['main.ld', out_ips, out_nso, out_nso + '.elf', out_nso + '.sym']:
+        for p in ['linker/main.ld', 'compile_commands.json']:
             try:
                 os.remove(p)
             except:
@@ -72,7 +79,7 @@ def main(argc, argv):
     
     # Relocate main symbols to to subsdk0
     if 'syms' in commands:
-        rc = run_proc(f"{sys.executable} tools/symbol_relocate.py main.sym {hex(main_addr)} {hex(main_addr+main_size)} main.ld")
+        rc = run_proc(f"{sys.executable} tools/symbol_relocate.py main.sym {hex(main_addr)} {hex(main_addr+main_size)} linker/main.ld")
         if rc != 0:
             fatal('Relocating main symbols failed!')
 
@@ -88,9 +95,9 @@ def main(argc, argv):
             fatal('Building with cmake failed!')
 
         if os.path.exists('build/subsdk0.sym'):
-            shutil.copy('build/subsdk0.sym', 'subsdk0.sym')
+            shutil.copy('build/subsdk0.sym', os.path.join(out_dir, 'subsdk0.sym'))
         if os.path.exists('build/subsdk0.elf'):
-            shutil.copy('build/subsdk0.elf', 'subsdk0.elf')
+            shutil.copy('build/subsdk0.elf', os.path.join(out_dir, 'subsdk0.elf'))
 
     # Create NSO from ELF
     if 'nso' in commands:

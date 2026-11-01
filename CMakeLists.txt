@@ -19,10 +19,10 @@ include_directories(include ${CMAKE_CURRENT_BINARY_DIR})
 add_executable(subsdk0.elf ${SOURCES})
 
 set_target_properties(subsdk0.elf PROPERTIES
-    LINK_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/linker.ld;${CMAKE_CURRENT_SOURCE_DIR}/main.ld;${CMAKE_CURRENT_SOURCE_DIR}/sdk.ld"
+    LINK_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/linker/linker.ld;${CMAKE_CURRENT_SOURCE_DIR}/linker/main.ld;${CMAKE_CURRENT_SOURCE_DIR}/linker/sdk.ld"
 )
 
-set(CMAKE_C_LINK_EXECUTABLE "arm-none-eabi-ld -pie -z noexecstack -T ${CMAKE_CURRENT_SOURCE_DIR}/linker.ld -T ${CMAKE_CURRENT_SOURCE_DIR}/main.ld -T ${CMAKE_CURRENT_SOURCE_DIR}/sdk.ld <OBJECTS> -o <TARGET>")
+set(CMAKE_C_LINK_EXECUTABLE "arm-none-eabi-ld -pie -z noexecstack -T ${CMAKE_CURRENT_SOURCE_DIR}/linker/linker.ld -T ${CMAKE_CURRENT_SOURCE_DIR}/linker/main.ld -T ${CMAKE_CURRENT_SOURCE_DIR}/linker/sdk.ld <OBJECTS> -o <TARGET>")
 set(CMAKE_CXX_LINK_EXECUTABLE ${CMAKE_C_LINK_EXECUTABLE})
 
 find_program(OBJDUMP NAMES llvm-objdump REQUIRED)

@@ -1,11 +1,13 @@
 # Build files
 /build/
+/cache/
 /tools/instruction.o
-/main.ld
+main.ld
 /subsdk0
 /subsdk0.elf
 /subsdk0.sym
 *.ips
+out/
 
 # Python
 __pycache__/
