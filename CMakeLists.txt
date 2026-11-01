@@ -16,6 +16,17 @@ file(GLOB_RECURSE SOURCES src/*.*)
 
 include_directories(include ${CMAKE_CURRENT_BINARY_DIR})
 
+file(GLOB LIB_SUBDIRS lib/*)
+foreach(SUBDIR ${LIB_SUBDIRS})
+    if(IS_DIRECTORY "${SUBDIR}")
+        if(EXISTS "${SUBDIR}/include")
+            include_directories("${SUBDIR}/include")
+        else()
+            include_directories("${SUBDIR}")
+        endif()
+    endif()
+endforeach()
+
 add_executable(subsdk0.elf ${SOURCES})
 
 set_target_properties(subsdk0.elf PROPERTIES
