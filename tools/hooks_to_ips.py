@@ -37,7 +37,11 @@ class Hook():
         try:
             for key in ['address', 'addr']:
                 if key in dict:
-                    self.address = int(dict[key], 0)
+                    raw_addr = int(dict[key], 0)
+                    # convert virtual addresses
+                    if raw_addr >= 0x60000000:
+                        raw_addr -= 0x60000000
+                    self.address = raw_addr
                     address_found = True
                     break
         except ValueError:
