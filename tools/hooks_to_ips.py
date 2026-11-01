@@ -291,11 +291,10 @@ def main(argc, argv):
         hooks += load_hooks(hks_path)
     
     elif os.path.isdir(hks_path):
-        for file in os.listdir(hks_path):
-            hks_file = os.fsdecode(file)
-            if hks_file.endswith(".hks"): 
-                hooks += load_hooks(os.path.join(hks_path, hks_file))
-
+        for root, dirs, files in os.walk(hks_path):
+            for file in files:
+                if file.endswith(".hks"):
+                    hooks += load_hooks(os.path.join(root, file))
     else:
         fatal("Hooks path is invalid!")
 
