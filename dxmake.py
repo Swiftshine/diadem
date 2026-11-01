@@ -85,6 +85,10 @@ def main(argc, argv):
 
     # Compile and link code to ELF
     if 'make' in commands:
+        rc = run_proc(f"{sys.executable} tools/setup_stdlib.py")
+        if rc != 0:
+            fatal('Setting up standard library failed!')
+
         if not os.path.exists('build'):
             rc = run_proc('cmake -B build')
             if rc != 0:
