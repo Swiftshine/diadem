@@ -76,7 +76,7 @@ def assemble_instruction(str):
     instruction_src_file.write('.section \".instruction\"\n.arm\n.fpu crypto-neon-fp-armv8\n    %s\n' % str)
     instruction_src_file.close()
 
-    ret = run_proc('clang %s --target=armv7l-none-eabihf -mabi=aapcs-linux -mcpu=cortex-a57 -mfpu=crypto-neon-fp-armv8 -mfloat-abi=hard -o %s -c' % (workdir + '/instruction_source.s', workdir + '/instruction.o'))
+    ret = run_proc('clang %s --target=armv7l-none-eabihf -mcpu=cortex-a57 -mfpu=crypto-neon-fp-armv8 -mfloat-abi=hard -o %s -c' % (workdir + '/instruction_source.s', workdir + '/instruction.o'))
     try_remove(workdir + '/instruction_source.s')
     if ret != 0:
         raise Exception('Compiling instruction failed!')

@@ -6,7 +6,6 @@ import struct
 import re
 import subprocess
 import binascii
-from termcolor import cprint
 
 import ips32
 import arm
@@ -15,7 +14,7 @@ from symbols import SymbolTable
 
 
 def fatal(msg):
-    cprint(msg, 'red')
+    print(msg, file=sys.stderr)
     sys.exit(1)
 
 def run_proc(cmd):
@@ -185,7 +184,7 @@ class NopHook(Hook):
 
 def load_hooks(path):
 
-    print(path)
+    print(f"\tProcessing: {path}")
 
     hooks = []
 
@@ -220,7 +219,7 @@ def load_hooks(path):
                     try:
                         hooks.append(Hook.from_data(path, curr_hook_line, curr_name, curr_dict))
                     except Exception as e:
-                        cprint('%s:%d: parsing hook \"%s\" failed: %s' % (path, curr_hook_line, curr_name, str(e)), 'red')
+                        print('%s:%d: parsing hook \"%s\" failed: %s' % (path, curr_hook_line, curr_name, str(e)), file=sys.stderr)
 
                 curr_name = line_sanitized
                 curr_dict = {}
@@ -251,7 +250,7 @@ def load_hooks(path):
         try:
             hooks.append(Hook.from_data(path, curr_hook_line, curr_name, curr_dict))
         except Exception as e:
-            cprint('%s:%d: parsing hook \"%s\" failed: %s' % (path, curr_hook_line, curr_name, str(e)), 'red')
+            print('%s:%d: parsing hook \"%s\" failed: %s' % (path, curr_hook_line, curr_name, str(e)), file=sys.stderr)
         
     f.close()
 
@@ -310,7 +309,7 @@ def main(argc, argv):
         try:
             hook.write_ips(out_file, sym_table)
         except Exception as e:
-            cprint('%s:%d: applying hook \"%s\" failed: %s' % (hook.path, hook.line, hook.name, str(e)), 'red')
+            print('%s:%d: applying hook \"%s\" failed: %s' % (hook.path, hook.line, hook.name, str(e)), file=sys.stderr)
     
     ips32.write_eof(out_file)
 

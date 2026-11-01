@@ -3,7 +3,6 @@
 import sys
 import os
 import ftplib
-from termcolor import cprint
 
 ftp_host = '192.168.178.79'
 ftp_port = 5000
@@ -12,9 +11,8 @@ ftp_pwd = 'nsmbusux'
 ftp_exefs = '/atmosphere/titles/0100EA80032EA000/exefs/'
 ftp_exefs_patches = '/atmosphere/exefs_patches/nsmbudx/'
 
-
 def fatal(msg):
-    cprint(msg, 'red')
+    print(msg, file=sys.stderr)
     sys.exit(1)
 
 def main(argc, argv):
@@ -75,17 +73,17 @@ def main(argc, argv):
         nso_file = open(nso_path,'rb')
         ftp_session.cwd(host_exefs)
         ftp_session.storbinary('STOR %s' % os.path.basename(nso_path), nso_file)
-        cprint('%s uploaded to %s' % (nso_path, host_exefs), 'green')
+        print('%s uploaded to %s' % (nso_path, host_exefs))
 
         ips_file = open(ips_path,'rb')
         ftp_session.cwd(host_exefs_patches)
         ftp_session.storbinary('STOR %s' % os.path.basename(ips_path), ips_file)
-        cprint('%s uploaded to %s' % (ips_path, host_exefs_patches), 'green')
+        print('%s uploaded to %s' % (ips_path, host_exefs_patches))
 
         ftp_session.quit()
 
     except Exception as e:
-        cprint('Uploading files failed: %s' % str(e), 'red')
+        print('Uploading files failed: %s' % str(e), file=sys.stderr)
         sys.exit(1)
 
 

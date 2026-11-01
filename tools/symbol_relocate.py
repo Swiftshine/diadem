@@ -2,12 +2,10 @@
 
 import sys
 from operator import itemgetter
-from termcolor import cprint
 from symbols import SymbolTable
-
  
 def fatal(msg):
-    cprint(msg, 'red')
+    print(msg, file=sys.stderr)
     sys.exit(1)
 
 
