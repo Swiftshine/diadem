@@ -1,106 +1,106 @@
-#include "profile.h"
-#include "actor/actor.h"
+// #include "profile.h"
+// #include "actor/actor.h"
 
-Profile* Profile::profilesCustom[NUM_PROFILES_CUSTOM];
-s16 Profile::prioritiesCustom[NUM_PROFILES_CUSTOM] = { 0 };
-u8 Profile::hasResourcesCustom[NUM_PROFILES_CUSTOM] = { 0 };
-u8 Profile::resourceCountCustom[NUM_PROFILES_CUSTOM] = { 0 };
-const sead::SafeString* Profile::resourceListsCustom[NUM_PROFILES_CUSTOM] = { 0 };
-
-
-Profile::Profile(Actor* (*buildFunc)(const ActorBuildInfo*), u32 id, const sead::SafeString& name, const ActorInfo* actorInfo, u32 flags)
-{
-    this->buildFunc = buildFunc;
-    this->id = id;
-
-    if (actorInfo)
-        this->actorInfo = actorInfo;
-    else
-        this->actorInfo = &ActorInfo::Default;
-
-    this->hasResourcesLoaded = 0;
-    this->flags = flags;
-
-    if (id < NUM_PROFILES_ORIGINAL)
-        profilesOriginal[id] = this;
-
-    else if (id < NUM_PROFILES)
-        profilesCustom[id - NUM_PROFILES_ORIGINAL] = this;
-
-    else
-        profilesOriginal[0] = this;
-}
-
-u32 Profile::vf00()
-{
-    return 1;
-}
+// Profile* Profile::profilesCustom[NUM_PROFILES_CUSTOM];
+// s16 Profile::prioritiesCustom[NUM_PROFILES_CUSTOM] = { 0 };
+// u8 Profile::hasResourcesCustom[NUM_PROFILES_CUSTOM] = { 0 };
+// u8 Profile::resourceCountCustom[NUM_PROFILES_CUSTOM] = { 0 };
+// const sead::SafeString* Profile::resourceListsCustom[NUM_PROFILES_CUSTOM] = { 0 };
 
 
-Profile* Profile::get(u32 id)
-{
-    if (id < NUM_PROFILES_ORIGINAL)
-        return profilesOriginal[id];
+// Profile::Profile(Actor* (*buildFunc)(const ActorBuildInfo*), u32 id, const sead::SafeString& name, const ActorInfo* actorInfo, u32 flags)
+// {
+//     this->buildFunc = buildFunc;
+//     this->id = id;
 
-    if (id < NUM_PROFILES)
-        return profilesCustom[id - NUM_PROFILES_ORIGINAL];
+//     if (actorInfo)
+//         this->actorInfo = actorInfo;
+//     else
+//         this->actorInfo = &ActorInfo::Default;
 
-    return profilesOriginal[0];
-}
+//     this->hasResourcesLoaded = 0;
+//     this->flags = flags;
 
-s16 Profile::getPriority(u32 id)
-{
-    if (id < NUM_PROFILES_ORIGINAL)
-        return prioritiesOriginal[id];
+//     if (id < NUM_PROFILES_ORIGINAL)
+//         profilesOriginal[id] = this;
 
-    if (id < NUM_PROFILES)
-        return prioritiesCustom[id - NUM_PROFILES_ORIGINAL];
+//     else if (id < NUM_PROFILES)
+//         profilesCustom[id - NUM_PROFILES_ORIGINAL] = this;
 
-    return -1;
-}
+//     else
+//         profilesOriginal[0] = this;
+// }
 
-u8 Profile::getHasResources(u32 id)
-{
-    if (id < NUM_PROFILES_ORIGINAL)
-        return hasResourcesOriginal[id];
-
-    if (id < NUM_PROFILES)
-        return hasResourcesCustom[id - NUM_PROFILES_ORIGINAL];
-
-    return 0;
-}
-
-u8 Profile::getResourceCount(u32 id)
-{
-    if (id < NUM_PROFILES_ORIGINAL)
-        return resourceCountOriginal[id];
-
-    if (id < NUM_PROFILES)
-        return resourceCountCustom[id - NUM_PROFILES_ORIGINAL];
-
-    return 0;
-}
-
-const sead::SafeString* Profile::getResourceList(u32 id)
-{
-    if (id < NUM_PROFILES_ORIGINAL)
-        return resourceListsOriginal[id];
-
-    if (id < NUM_PROFILES)
-        return resourceListsCustom[id - NUM_PROFILES_ORIGINAL];
-
-    return nullptr;
-}
-
-u32 Profile::getNumProfiles()
-{
-    return NUM_PROFILES;
-}
+// u32 Profile::vf00()
+// {
+//     return 1;
+// }
 
 
-u32 Profile::spriteToProfileList[] =
-{
-    467,    //   0
+// Profile* Profile::get(u32 id)
+// {
+//     if (id < NUM_PROFILES_ORIGINAL)
+//         return profilesOriginal[id];
+
+//     if (id < NUM_PROFILES)
+//         return profilesCustom[id - NUM_PROFILES_ORIGINAL];
+
+//     return profilesOriginal[0];
+// }
+
+// s16 Profile::getPriority(u32 id)
+// {
+//     if (id < NUM_PROFILES_ORIGINAL)
+//         return prioritiesOriginal[id];
+
+//     if (id < NUM_PROFILES)
+//         return prioritiesCustom[id - NUM_PROFILES_ORIGINAL];
+
+//     return -1;
+// }
+
+// u8 Profile::getHasResources(u32 id)
+// {
+//     if (id < NUM_PROFILES_ORIGINAL)
+//         return hasResourcesOriginal[id];
+
+//     if (id < NUM_PROFILES)
+//         return hasResourcesCustom[id - NUM_PROFILES_ORIGINAL];
+
+//     return 0;
+// }
+
+// u8 Profile::getResourceCount(u32 id)
+// {
+//     if (id < NUM_PROFILES_ORIGINAL)
+//         return resourceCountOriginal[id];
+
+//     if (id < NUM_PROFILES)
+//         return resourceCountCustom[id - NUM_PROFILES_ORIGINAL];
+
+//     return 0;
+// }
+
+// const sead::SafeString* Profile::getResourceList(u32 id)
+// {
+//     if (id < NUM_PROFILES_ORIGINAL)
+//         return resourceListsOriginal[id];
+
+//     if (id < NUM_PROFILES)
+//         return resourceListsCustom[id - NUM_PROFILES_ORIGINAL];
+
+//     return nullptr;
+// }
+
+// u32 Profile::getNumProfiles()
+// {
+//     return NUM_PROFILES;
+// }
+
+namespace Profile {
+
+    unsigned int spriteToProfileList[] = {
+        467,    //   0
     469,    //   1
     479,    //   2
     480,    //   3
@@ -826,14 +826,15 @@ u32 Profile::spriteToProfileList[] =
     533,    // 723
 
     // Start of custom entries
-    ProfileId::MrSun,               // 724
-    ProfileId::MrMoon,              // 725
-    ProfileId::ActorSpawner,        // 726
-    ProfileId::ModelTest,           // 727
-    ProfileId::LightActor,          // 728
-    ProfileId::BombBros,            // 729
-    ProfileId::EffectSpawner,       // 730
-    ProfileId::FakeStarCoin,        // 731
-    ProfileId::MagicLift,           // 732
-    ProfileId::KoopaShellBros       // 733
+    // ProfileId::MrSun,               // 724
+    // ProfileId::MrMoon,              // 725
+    // ProfileId::ActorSpawner,        // 726
+    // ProfileId::ModelTest,           // 727
+    // ProfileId::LightActor,          // 728
+    // ProfileId::BombBros,            // 729
+    // ProfileId::EffectSpawner,       // 730
+    // ProfileId::FakeStarCoin,        // 731
+    // ProfileId::MagicLift,           // 732
+    // ProfileId::KoopaShellBros       // 733
 };
+}
