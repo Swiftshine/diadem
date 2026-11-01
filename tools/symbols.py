@@ -1,10 +1,10 @@
 import collections
-import demangler
+from itanium_demangler import parse as demangle_symbol
 
 
 def demangle(mangled_str):
     try:
-        demangled = demangler.demangle(mangled_str)
+        demangled = demangle_symbol(mangled_str)
 
         if demangled == None:
             raise Exception('Demangling failed')
