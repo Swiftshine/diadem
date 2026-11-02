@@ -3,7 +3,7 @@
 	url = https://github.com/Swiftshine/dx-headers
 [submodule "lib/sead"]
 	path = lib/sead
-	url = https://github.com/open-ead/sead
+	url = https://github.com/Swiftshine/sead
 [submodule "lib/nn"]
 	path = lib/nn
-	url = https://github.com/open-ead/nnsdk
+	url = https://github.com/Swiftshine/nnsdk
