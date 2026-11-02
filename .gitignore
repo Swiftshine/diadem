@@ -33,5 +33,7 @@ __pycache__/
 scratch/
 src/scratch/
 hooks/scratch/
+.DS_Store
+
 # lib
 lib/std
