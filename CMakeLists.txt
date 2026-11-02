@@ -11,7 +11,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(ARCH_FLAGS "--target=armv7l-none-eabihf -mcpu=cortex-a57 -mfpu=crypto-neon-fp-armv8 -mfloat-abi=hard -fPIC")
 set(CMAKE_C_FLAGS "${ARCH_FLAGS} -nostdlib")
-set(CMAKE_CXX_FLAGS "${ARCH_FLAGS} -nostdlib -fno-rtti -fno-exceptions -fpermissive -fno-sized-deallocation -D_LIBCPP_HAS_NO_THREADS")
+set(CMAKE_CXX_FLAGS "${ARCH_FLAGS} -std=c++17 -nostdlib -fno-rtti -fno-exceptions -fpermissive -fno-sized-deallocation -D_LIBCPP_HAS_NO_THREADS")
 set(CMAKE_ASM_FLAGS "${ARCH_FLAGS}")
 
 file(GLOB_RECURSE SOURCES src/*.*)
