@@ -1,0 +1,7 @@
+# cxa
+__cxa_guard_acquire = 0x609AD3E8;
+__cxa_guard_release = 0x609AD3F4;
+
+# got entries
+got_main_crt0 = 0x60C61A00
+got_spriteToProfileList = 0x60C61B18;

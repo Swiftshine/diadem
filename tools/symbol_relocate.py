@@ -41,6 +41,10 @@ def main(argc, argv):
 
     # Create linker script with relocated symbols
     for sym_name, sym_address in sorted(sym_table.mangled_dict.items(), key=itemgetter(1)):
+        # Normalise symbol addresses (virtual -> physical)
+        if sym_address >= 0x60000000:
+            sym_address -= 0x60000000
+        
         sym_line = '%s = %s;\n' % (sym_name, hex(sym_address))
         out_file.write(sym_line)
 
