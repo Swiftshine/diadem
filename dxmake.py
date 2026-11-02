@@ -79,7 +79,7 @@ def main(argc, argv):
     
     # Relocate main symbols to to subsdk0
     if 'syms' in commands:
-        rc = run_proc(f"{sys.executable} tools/symbol_relocate.py main.sym {hex(main_addr)} {hex(main_addr+main_size)} linker/main.ld")
+        rc = run_proc(f"{sys.executable} tools/symbol_relocate.py syms/main.sym {hex(main_addr)} {hex(main_addr+main_size)} linker/main.ld")
         if rc != 0:
             fatal('Relocating main symbols failed!')
 
