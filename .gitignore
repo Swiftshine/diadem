@@ -8,6 +8,7 @@ main.ld
 /subsdk0.sym
 *.ips
 out/
+clangd/
 
 # Python
 __pycache__/
