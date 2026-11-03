@@ -13,3 +13,6 @@
 [submodule "lib/agl"]
 	path = lib/agl
 	url = https://github.com/Swiftshine/agl
+[submodule "lib/eui"]
+	path = lib/eui
+	url = https://github.com/Swiftshine/eui
