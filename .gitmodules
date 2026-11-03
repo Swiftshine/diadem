@@ -7,3 +7,6 @@
 [submodule "lib/nn"]
 	path = lib/nn
 	url = https://github.com/Swiftshine/nnsdk
+[submodule "lib/nnware"]
+	path = lib/nnware
+	url = https://github.com/Swiftshine/nnware
