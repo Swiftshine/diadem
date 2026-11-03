@@ -24,6 +24,7 @@ add_executable(subsdk0.elf ${SOURCES})
 target_include_directories(subsdk0.elf PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}/lib/agl/include/
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib/eui/include/
     ${CMAKE_CURRENT_SOURCE_DIR}/lib/headers
     ${CMAKE_CURRENT_SOURCE_DIR}/lib/nn/include/
     ${CMAKE_CURRENT_SOURCE_DIR}/lib/nnware/lib/ui2d/include/
