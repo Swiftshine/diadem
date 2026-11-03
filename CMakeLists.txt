@@ -19,20 +19,16 @@ file(GLOB_RECURSE SOURCES src/*.*)
 
 include_directories(include ${CMAKE_CURRENT_BINARY_DIR})
 
-file(GLOB LIB_SUBDIRS lib/*)
-foreach(SUBDIR ${LIB_SUBDIRS})
-    if(IS_DIRECTORY "${SUBDIR}")
-        if(EXISTS "${SUBDIR}/include")
-            include_directories("${SUBDIR}/include")
-        elseif(EXISTS "${SUBDIR}/lib")
-            include_directories("${SUBDIR}/lib")
-        else()
-            include_directories("${SUBDIR}")
-        endif()
-    endif()
-endforeach()
-
 add_executable(subsdk0.elf ${SOURCES})
+
+target_include_directories(subsdk0.elf PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib/agl/include/
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib/headers
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib/nn/include/
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib/nnware/lib/ui2d/include/
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib/sead/include/
+)
 
 target_include_directories(subsdk0.elf SYSTEM PRIVATE
     "$<$<COMPILE_LANGUAGE:C>:${STDLIB_INCLUDES}>"
