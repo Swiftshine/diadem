@@ -2,6 +2,19 @@
 __cxa_guard_acquire = 0x609AD3E8;
 __cxa_guard_release = 0x609AD3F4;
 
+# new/delete/malloc/free
+_Znwj   = 0x608DE044;
+_Znaj   = 0x608DE09C;
+_ZdlPv  = 0x608DE3A0;
+_ZdaPv  = 0x608DE3FC;
+malloc  = 0x60835108;
+free    = 0x6083515C;
+
 # got entries
 got_main_crt0 = 0x60C61A00
 got_spriteToProfileList = 0x60C61B18;
+
+#### GAME SYMBOLS #####
+
+# StateID
+_ZTV7StateID = 0x60C2A0AC;
