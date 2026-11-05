@@ -27,7 +27,9 @@ target_include_directories(subsdk0.elf PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/lib/eui/include/
     ${CMAKE_CURRENT_SOURCE_DIR}/lib/headers
     ${CMAKE_CURRENT_SOURCE_DIR}/lib/nn/include/
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib/nn/lib/gfx/include/
     ${CMAKE_CURRENT_SOURCE_DIR}/lib/nnware/lib/ui2d/include/
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib/nnware/lib/font/include/
     ${CMAKE_CURRENT_SOURCE_DIR}/lib/sead/include/
 )
 
